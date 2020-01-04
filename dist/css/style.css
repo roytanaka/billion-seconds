@@ -1,10 +1,23 @@
-.example {
-  display: grid;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
-  background: linear-gradient(to bottom, white, black); }
+html {
+  font-size: 190%;
+  background: radial-gradient(ellipse at center, #1f2e3d, #000000); }
+
+body,
+html {
+  height: 100%;
+  overflow: hidden; }
+
+main {
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding-top: 2.5rem;
+  padding-right: 2.5rem;
+  padding-left: 2.5rem;
+  padding-bottom: 2.5rem;
+  z-index: -1;
+  width: 100%; }
