@@ -1,5 +1,6 @@
 import { src, dest, watch, series, parallel } from 'gulp';
 import sass from 'gulp-sass';
+import autoprefixer from 'gulp-autoprefixer';
 import uglify from 'gulp-uglify';
 import del from 'del';
 import babel from 'gulp-babel';
@@ -24,6 +25,7 @@ function serve(done) {
 
 function css(done) {
   return src('src/scss/**/*.scss', { sourcemaps: true })
+    .pipe(autoprefixer())
     .pipe(sass({ errLogToConsole: true }))
     .pipe(dest('dist/css/'), { sourcemaps: './maps/' })
     .pipe(browserSync.stream());

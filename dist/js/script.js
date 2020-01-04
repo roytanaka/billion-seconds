@@ -1,0 +1,1 @@
+"use strict";var reallylongconstant="hello";console.log(reallylongconstant);var myFunction=function(){console.log("world")};
