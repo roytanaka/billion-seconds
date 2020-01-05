@@ -1,34 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
-html {
-  font-size: 100%;
-}
-body,
-html {
-  height: 100%;
-  overflow: hidden;
-}
-body {
-  background: radial-gradient(ellipse at center, #1f2e3d, #000000);
-}
-main {
-  color: #ffffff;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding-top: 2.5rem;
-  padding-right: 2.5rem;
-  padding-left: 2.5rem;
-  padding-bottom: 2.5rem;
-  z-index: -1;
-  width: 100%;
-}
-.text {
-  color: #c5c6c7;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.8em;
-}
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Share+Tech+Mono&display=swap');
 
+@import './components/reset-src';
+@import './components/layout';
+@import './components/seconds';
+@import './components/info';
+
+@import './components/stars';
 @import './components/date-picker';
