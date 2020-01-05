@@ -10,6 +10,7 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     open: 'Google Chrome',
+    host: '0.0.0.0',
   },
   plugins: [
     new CleanWebpackPlugin({

@@ -1,11 +1,12 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 body {
   display: flex;
   flex-direction: column;
-  background: radial-gradient(ellipse at center, #1f2e3d, #000000);
+  background: radial-gradient(ellipse at 50% 40%, #1f2e3d, #000000);
 
   main {
     flex: 1 0 auto;
