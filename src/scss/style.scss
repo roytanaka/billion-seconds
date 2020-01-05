@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 html {
-  font-size: 190%;
-  background: radial-gradient(ellipse at center, #1f2e3d, #000000);
+  font-size: 100%;
 }
 body,
 html {
   height: 100%;
   overflow: hidden;
+}
+body {
+  background: radial-gradient(ellipse at center, #1f2e3d, #000000);
 }
 main {
   color: #ffffff;
@@ -21,3 +24,11 @@ main {
   z-index: -1;
   width: 100%;
 }
+.text {
+  color: #c5c6c7;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+@import './components/date-picker';
