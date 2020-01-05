@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -17,12 +18,18 @@ module.exports = {
       cleanOnceBeforeBuildPatterns: ['**/*', '!index.html'],
     }),
     new MomentLocalesPlugin(),
+    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          // 'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.m?js$/,
@@ -34,6 +41,7 @@ module.exports = {
           },
         },
       },
+      { test: /\.hbs$/i, loader: 'handlebars-loader' },
     ],
   },
   output: {
