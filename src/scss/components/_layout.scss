@@ -1,26 +1,35 @@
+html {
+  font-size: 100%;
+}
 html,
 body {
   height: 100%;
   overflow: hidden;
 }
 body {
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   background: radial-gradient(ellipse at 50% 40%, #1f2e3d, #000000);
+}
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+footer {
+  flex-shrink: 0;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  main {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  footer {
-    flex-shrink: 0;
-    padding: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 75%;
   }
 }
