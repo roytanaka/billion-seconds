@@ -29,3 +29,25 @@ export const dates = (year, month) => {
 
 export const hours = [...Array(24).keys()].map(x => x);
 export const minutes = [...Array(60).keys()].map(x => x);
+
+export const getSecondsData = function(bday) {
+  const now = moment();
+  const data = {
+    fromDate: bday.format('MMMM Do YYYY, h:mm a'),
+    billionthSecondDay: {
+      date: bday
+        .clone()
+        .add(1000000000, 'seconds')
+        .format('MMMM Do YYYY'),
+      tense: now.diff(bday, 'seconds') < 1000000000 ? 'will be' : 'was',
+    },
+    twoBillionthSecondDay: {
+      date: bday
+        .clone()
+        .add(2000000000, 'seconds')
+        .format('MMMM Do YYYY'),
+      tense: now.diff(bday, 'seconds') < 2000000000 ? 'will be' : 'was',
+    },
+  };
+  return data;
+};
