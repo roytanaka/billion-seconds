@@ -1,7 +1,22 @@
-$date-picker-bg: rgba(11, 12, 16, 0.8);
 .time-text {
   margin-right: 0.1rem;
   color: $star-color;
+}
+.date-selectors > div {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.select-group {
+  display: inline-block;
+  label {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.2rem;
+    opacity: 0;
+  }
+  &:hover label {
+    opacity: 1;
+  }
 }
 .select-wrapper {
   position: relative;
@@ -10,10 +25,10 @@ $date-picker-bg: rgba(11, 12, 16, 0.8);
   font-size: 0.8rem;
   margin-right: 0.2rem;
   select.custom-dropdown {
-    background-color: $date-picker-bg;
-    border: 1px solid lighten($date-picker-bg, 30%);
+    background-color: $dark-bg;
+    border: 1px solid lighten($dark-bg, 30%);
     height: 2rem;
-    color: lighten($date-picker-bg, 30%);
+    color: lighten($dark-bg, 30%);
     font-size: inherit;
     padding: 0.5em 1.3rem 0.5rem 0.5rem;
     border-radius: 3px;
@@ -38,7 +53,7 @@ $date-picker-bg: rgba(11, 12, 16, 0.8);
   }
   &::after {
     /*  Custom dropdown arrow */
-    color: lighten($date-picker-bg, 30%);
+    color: lighten($dark-bg, 30%);
     content: '\25BC';
     font-size: 0.6rem;
     right: 7px;
