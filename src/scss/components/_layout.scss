@@ -22,8 +22,14 @@ main {
 }
 footer {
   flex-shrink: 0;
-  padding: 3rem;
+  padding: 3rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 350px) {
+  html {
+    font-size: 80%;
+  }
 }
