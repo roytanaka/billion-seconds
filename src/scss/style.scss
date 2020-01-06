@@ -1,11 +1,10 @@
 $star-color: #66fcf1;
 
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Share+Tech+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans|Share+Tech+Mono&display=swap");
 
-@import './components/reset-src';
-@import './components/layout';
-@import './components/seconds';
-@import './components/info';
+@import "./components/reset-src";
+@import "./components/layout";
+@import "./components/seconds";
 
-@import './components/stars';
-@import './components/date-picker';
+@import "./components/stars";
+@import "./components/date-picker";
