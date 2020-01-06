@@ -5,7 +5,14 @@
   <p>
     seconds since {{ fromDate }}
   </p>
-  <small>
-    Your 1 billionth second {{ tense }} on {{ billionthSecondDay }}!
-  </small>
+  <div>
+    <small>
+      Your 1st billionth second {{ billionthSecondDay.tense }} on {{ billionthSecondDay.date }}
+    </small>
+  </div>
+  <div>
+    <small>
+      Your 2nd billionth second {{ twoBillionthSecondDay.tense }} on {{ twoBillionthSecondDay.date }}
+    </small>
+  </div>
 </div>
