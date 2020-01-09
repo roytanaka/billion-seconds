@@ -38,14 +38,14 @@ export const getSecondsData = function(bday) {
       date: bday
         .clone()
         .add(1000000000, 'seconds')
-        .format('MMMM Do YYYY'),
+        .format('MMM Do YYYY, HH:mm'),
       tense: now.diff(bday, 'seconds') < 1000000000 ? 'will be' : 'was',
     },
     twoBillionthSecondDay: {
       date: bday
         .clone()
         .add(2000000000, 'seconds')
-        .format('MMMM Do YYYY'),
+        .format('MMM Do YYYY, HH:mm'),
       tense: now.diff(bday, 'seconds') < 2000000000 ? 'will be' : 'was',
     },
   };
