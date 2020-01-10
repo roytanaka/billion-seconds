@@ -60,8 +60,10 @@ modalMinute.innerHTML = minutesOptions;
 
 const modal = document.querySelector('.modal');
 const selectors = modal.querySelectorAll('select');
+const errorMsg = modal.querySelector('.modal-error');
 for (const select of selectors) {
   select.addEventListener('change', () => {
+    errorMsg.setAttribute('aria-hidden', 'true');
     updateDate(
       modalYear.value,
       modalMonth.value,
@@ -81,8 +83,14 @@ for (const select of footerSelectors) {
 
 const newBirthday = document.querySelector('#getSeconds');
 
+let bday;
+let secondsData;
+
 // Modal submit
 newBirthday.addEventListener('click', () => {
+  if (!secondsData.dateValid) {
+    return errorMsg.setAttribute('aria-hidden', 'false');
+  }
   year.value = modalYear.value;
   month.value = modalMonth.value;
   date.value = modalDate.value;
@@ -103,15 +111,6 @@ newBirthday.addEventListener('click', () => {
     footerDate.setAttribute('aria-hidden', 'false');
   }, 800);
 });
-
-// setTimeout(() => {
-//   bday = moment([1979, 0, 4]);
-//   secondsData = dateBuilder.getSecondsData(bday);
-//   animateCSS('#seconds', 'zoomInUp');
-// }, 5000);
-
-let bday;
-let secondsData;
 
 function updateDate(year, month, date, hour, minute) {
   bday = moment([year, month, date, hour, minute]);

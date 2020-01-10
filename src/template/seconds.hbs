@@ -1,3 +1,4 @@
+{{#if dateValid}}
 <div class="seconds">
   {{ seconds }}
 </div>
@@ -16,3 +17,6 @@
     </small>
   </div>
 </div>
+{{else}}
+<h2 class="info">Oops. Invalid Date</h2>
+{{/if}}

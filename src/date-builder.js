@@ -34,6 +34,7 @@ export const getSecondsData = function(bday) {
   const now = moment();
   const data = {
     fromDate: bday.format('MMMM Do YYYY, h:mm a'),
+    dateValid: bday.format() === 'Invalid date' ? false : true,
     billionthSecondDay: {
       date: bday
         .clone()
