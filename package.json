@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode=production --devtool none",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --mode=development"
   },
   "author": "",
   "license": "ISC",
