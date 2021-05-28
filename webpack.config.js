@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, options) => {
   console.log(`Webpack in ${options.mode} mode`);
@@ -20,6 +21,10 @@ module.exports = (env, options) => {
       }),
       new MomentLocalesPlugin(),
       new MiniCssExtractPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+      })
+  
     ],
     module: {
       rules: [
