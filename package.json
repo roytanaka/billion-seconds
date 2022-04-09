@@ -40,6 +40,6 @@
     "animate.css": "^3.7.2",
     "handlebars": "^4.5.3",
     "handlebars-loader": "^1.7.1",
-    "moment": "^2.24.0"
+    "moment": "^2.29.2"
   }
 }
