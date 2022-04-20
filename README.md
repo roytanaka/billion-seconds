@@ -1,5 +1,5 @@
 # Billion Seconds App
-Calculates how many seconds old you are from your birthday.
+Calculates how many seconds old you are from your birthday. Shows your billion second day and 2 billion second day.
 ## Project setup
 ```
 npm install
