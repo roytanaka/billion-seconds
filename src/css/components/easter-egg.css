@@ -1,0 +1,96 @@
+.easter-egg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 12, 16, 0.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+
+  &.easter-egg-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &[aria-hidden='true'] {
+    pointer-events: none;
+  }
+}
+
+.easter-egg-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2.5rem;
+  border: 1px solid rgba(102, 252, 241, 0.25);
+  border-radius: 0.5rem;
+  max-width: 28rem;
+  width: 90%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(102, 252, 241, 0.35),
+      rgba(102, 252, 241, 0.05) 40%,
+      rgba(102, 252, 241, 0.15) 70%,
+      rgba(102, 252, 241, 0.35)
+    );
+    z-index: -1;
+  }
+}
+
+.easter-egg-eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(102, 252, 241, 0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.easter-egg-heading {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.4rem;
+  color: #66fcf1;
+  text-shadow:
+    0 0 8px rgba(102, 252, 241, 0.6),
+    0 0 24px rgba(102, 252, 241, 0.3);
+}
+
+.easter-egg-date {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1rem;
+  color: rgba(102, 252, 241, 0.8);
+}
+
+.easter-egg-close {
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(102, 252, 241, 0.3);
+  border-radius: 0.2rem;
+  padding: 0.3rem 1.2rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(102, 252, 241, 0.6);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    border-color: #66fcf1;
+    color: #66fcf1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #66fcf1;
+    outline-offset: 3px;
+  }
+}
