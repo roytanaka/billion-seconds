@@ -2,6 +2,7 @@ import './css/style.css';
 import { initStars, setSpeedMultiplier } from './stars.js';
 import { initRenderer } from './renderer.js';
 import { initShare } from './share.js';
+import { initEasterEgg } from './easter-egg.js';
 import * as dateBuilder from './date-builder.js';
 
 // Start the canvas starfield
@@ -64,6 +65,7 @@ const getSecondsBtn = document.querySelector('#getSeconds');
 let bday;
 let secondsData;
 let updateRenderer;
+let destroyEasterEgg;
 
 // Last submitted values — used to pre-fill modal on Start Over
 let lastYear, lastMonth, lastDate, lastHour, lastMinute;
@@ -95,6 +97,7 @@ getSecondsBtn.addEventListener('click', () => {
 
       updateRenderer = initRenderer(secondsContainer, onStartOver);
       initShare(secondsContainer, () => secondsData);
+      destroyEasterEgg = initEasterEgg(() => secondsData);
 
       // Move focus to results for keyboard/AT users
       secondsContainer.focus();
@@ -104,6 +107,7 @@ getSecondsBtn.addEventListener('click', () => {
 
 function onStartOver() {
   updateRenderer = null;
+  if (destroyEasterEgg) { destroyEasterEgg(); destroyEasterEgg = null; }
 
   animateCSS('#seconds', 'zoomOut', () => {
     secondsContainer.setAttribute('aria-hidden', 'true');

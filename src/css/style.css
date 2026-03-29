@@ -8,6 +8,7 @@
 @import './components/animations.css';
 @import './components/start-over.css';
 @import './components/share.css';
+@import './components/easter-egg.css';
 
 :root {
   --dark-bg: rgba(11, 12, 16, 0.8);

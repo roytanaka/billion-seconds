@@ -35,5 +35,9 @@ export function getSecondsData(bday) {
       date: bday.add(2_000_000_000, 'second').format('MMM D YYYY, HH:mm'),
       tense: now.diff(bday, 'second') < 2_000_000_000 ? 'will be' : 'was',
     },
+    trillionthSecondDay: {
+      date: bday.add(1_000_000_000_000, 'second').format('MMM D YYYY, HH:mm'),
+      tense: now.diff(bday, 'second') < 1_000_000_000_000 ? 'will be' : 'was',
+    },
   }
 }
