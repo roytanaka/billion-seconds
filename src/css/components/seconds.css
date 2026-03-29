@@ -1,3 +1,7 @@
+#seconds {
+  outline: none;
+}
+
 .seconds {
   display: block;
   font-family: 'Share Tech Mono', monospace;

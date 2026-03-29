@@ -21,11 +21,13 @@ Single-page vanilla JS app built with Vite 5. No framework.
 
 **Core logic:** `src/date-builder.js` — exports date/time option arrays, `makeBday(y, m, d, h, min)` (returns a Day.js object), and `getSecondsData(bday)` which returns milestone dates for the billionth and two-billionth seconds.
 
-**Renderer:** `src/renderer.js` — `initRenderer(container)` creates stable DOM nodes inside `#seconds` and returns an `update(secondsData)` function. Called once after modal submit; the interval calls `update()` on each tick. Stable nodes (vs. innerHTML) allow future modules to hold DOM references safely.
+**Renderer:** `src/renderer.js` — `initRenderer(container, onStartOver)` creates stable DOM nodes inside `#seconds`, appends a "Try another date" button wired to `onStartOver`, and returns an `update(secondsData)` function. Called once after modal submit; the interval calls `update()` on each tick.
+
+**Sharing:** `src/share.js` — `initShare(container, getSecondsData)` appends a Share button. On touch devices uses the native Web Share API; on desktop opens a custom popover with Copy link (clipboard API) + X/Facebook fallback links. Called once after modal submit alongside `initRenderer`.
 
 **Starfield:** `src/stars.js` — Canvas-based animated starfield. Exports `initStars()` and `setSpeedMultiplier(target, durationMs)`. The speed multiplier tween is built in for future use (Phase 2 warp effect on "Go" click). Three star size tiers match the original CSS layered effect.
 
-**Styles:** `src/css/style.css` imports 6 component partials. CSS custom properties (`--dark-bg`, `--dark-bg-lighter`, `--dark-bg-hover`) defined in `:root` in `style.css`. Uses native CSS nesting. PostCSS/autoprefixer runs via `postcss.config.js`. Note: `@import` rules must come before all other statements or PostCSS will warn.
+**Styles:** `src/css/style.css` imports 8 component partials. CSS custom properties (`--dark-bg`, `--dark-bg-lighter`, `--dark-bg-hover`) defined in `:root` in `style.css`. Uses native CSS nesting. PostCSS/autoprefixer runs via `postcss.config.js`. Note: `@import` rules must come before all other statements or PostCSS will warn.
 
 **Theme color:** `#66fcf1` (teal) is defined only in `src/stars.js` as `STAR_COLOR` — not as a CSS custom property. Change it there, then update the hardcoded hex values in `seconds.css`, `modal.css`, and `date-picker.css`.
 
@@ -39,6 +41,6 @@ Single-page vanilla JS app built with Vite 5. No framework.
 
 ## Deferred Features (future phases)
 
-- **Phase 2:** Social sharing (Web Share API + Twitter/X/Facebook), blog CTA (WordPress-only via `window.BillionSecondsConfig`)
-- **Phase 3:** Trillion-second easter egg — device shake (mobile) + rapid mouse wiggle (desktop) trigger; `stars.js` `setSpeedMultiplier` already supports the warp animation
-- **Phase 4:** GitHub Actions deploy workflow, WordPress shortcode plugin
+- **Phase 3:** GitHub Actions deploy workflow; clean up legacy files and delete any unneeded config files and folders
+- **Phase 4:** Trillion-second easter egg — device shake (mobile) + rapid mouse wiggle (desktop) trigger
+- **Phase 5:** WordPress shortcode plugin
