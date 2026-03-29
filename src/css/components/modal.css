@@ -1,4 +1,3 @@
-
 .modal {
   position: fixed;
   top: 0;
@@ -8,6 +7,7 @@
   height: 100%;
   overflow: hidden;
   outline: 0;
+  padding: 1rem;
 
   & .modal-centering {
     max-width: 30rem;
@@ -38,11 +38,18 @@
         position: absolute;
         inset: -1px;
         border-radius: inherit;
-        background: linear-gradient(135deg, rgba(102, 252, 241, 0.4), rgba(26, 107, 138, 0.2), transparent, rgba(26, 107, 138, 0.2), rgba(102, 252, 241, 0.4));
+        background: linear-gradient(
+          135deg,
+          rgba(102, 252, 241, 0.4),
+          rgba(26, 107, 138, 0.2),
+          transparent,
+          rgba(26, 107, 138, 0.2),
+          rgba(102, 252, 241, 0.4)
+        );
         z-index: -1;
       }
 
-& .modal-body {
+      & .modal-body {
         margin: 0.5rem 0;
         display: flex;
         justify-content: center;
