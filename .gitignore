@@ -1,2 +1,12 @@
 node_modules
 dist
+
+# Editor
+.claude
+.vscode
+.idea
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
