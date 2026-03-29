@@ -39,6 +39,6 @@ Single-page vanilla JS app built with Vite 5. No framework.
 
 ## Deferred Features (future phases)
 
-- **Phase 2:** Social sharing (Web Share API + Twitter/X/Facebook), blog CTA (WordPress-only via `window.BillionSecondsConfig`)
+- **Phase 2:** Accessibility (a11y) improvements; replace footer date selectors with a "Start Over" button that resets to the modal; social sharing (Web Share API with Twitter/X + Facebook fallbacks)
 - **Phase 3:** Trillion-second easter egg — device shake (mobile) + rapid mouse wiggle (desktop) trigger; `stars.js` `setSpeedMultiplier` already supports the warp animation
 - **Phase 4:** GitHub Actions deploy workflow, WordPress shortcode plugin

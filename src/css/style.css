@@ -6,6 +6,8 @@
 @import './components/modal.css';
 @import './components/date-picker.css';
 @import './components/animations.css';
+@import './components/start-over.css';
+@import './components/share.css';
 
 :root {
   --dark-bg: rgba(11, 12, 16, 0.8);

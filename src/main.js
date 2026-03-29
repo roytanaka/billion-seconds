@@ -1,147 +1,162 @@
-import './css/style.css'
-import { initStars } from './stars.js'
-import { initRenderer } from './renderer.js'
-import * as dateBuilder from './date-builder.js'
+import './css/style.css';
+import { initStars, setSpeedMultiplier } from './stars.js';
+import { initRenderer } from './renderer.js';
+import { initShare } from './share.js';
+import * as dateBuilder from './date-builder.js';
 
 // Start the canvas starfield
-initStars()
+initStars();
 
-// Populate date/time selectors
-const year = document.querySelector('#year')
-const modalYear = document.querySelector('#modalYear')
-const yearsOptions = dateBuilder.years.map(
-  y => `<option value="${y}">${y}</option>`
-)
-year.innerHTML = yearsOptions.join('')
-modalYear.innerHTML = yearsOptions.join('')
+// Populate modal date/time selectors
+const modalYear = document.querySelector('#modalYear');
+const modalMonth = document.querySelector('#modalMonth');
+const modalDate = document.querySelector('#modalDate');
+const modalHour = document.querySelector('#modalHour');
+const modalMinute = document.querySelector('#modalMinute');
 
-const month = document.querySelector('#month')
-const modalMonth = document.querySelector('#modalMonth')
-const monthsOptions = dateBuilder.months.map(
-  (m, i) => `<option value="${i}">${m}</option>`
-)
-month.innerHTML = monthsOptions.join('')
-modalMonth.innerHTML = monthsOptions.join('')
+modalYear.innerHTML = dateBuilder.years
+  .map((y) => `<option value="${y}">${y}</option>`)
+  .join('');
 
-const date = document.querySelector('#date')
-const modalDate = document.querySelector('#modalDate')
-const datesOptions = [...Array(31).keys()]
-  .map(x => 1 + x)
-  .map(d => `<option value="${d}">${d}</option>`)
-date.innerHTML = datesOptions.join('')
-modalDate.innerHTML = datesOptions.join('')
+modalMonth.innerHTML = dateBuilder.months
+  .map((m, i) => `<option value="${i}">${m}</option>`)
+  .join('');
 
-const hour = document.querySelector('#hour')
-const modalHour = document.querySelector('#modalHour')
-const hoursOptions = dateBuilder.hours.map((h, i) => {
-  const padded = h.toString().replace(/(^\d$)/, '0$1')
-  return `<option value="${i}">${padded}</option>`
-})
-hour.innerHTML = hoursOptions.join('')
-modalHour.innerHTML = hoursOptions.join('')
+modalDate.innerHTML = [...Array(31).keys()]
+  .map((x) => 1 + x)
+  .map((d) => `<option value="${d}">${d}</option>`)
+  .join('');
 
-const minute = document.querySelector('#minute')
-const modalMinute = document.querySelector('#modalMinute')
-const minutesOptions = dateBuilder.minutes.map((m, i) => {
-  const padded = m.toString().replace(/(^\d$)/, '0$1')
-  return `<option value="${i}">${padded}</option>`
-})
-minute.innerHTML = minutesOptions.join('')
-modalMinute.innerHTML = minutesOptions.join('')
+modalHour.innerHTML = dateBuilder.hours
+  .map(
+    (h, i) =>
+      `<option value="${i}">${h.toString().replace(/(^\d$)/, '0$1')}</option>`,
+  )
+  .join('');
 
-// Modal change listeners — update preview as user picks values
-const modal = document.querySelector('.modal')
-const modalSelectors = modal.querySelectorAll('select')
-const errorMsg = modal.querySelector('.modal-error')
+modalMinute.innerHTML = dateBuilder.minutes
+  .map(
+    (m, i) =>
+      `<option value="${i}">${m.toString().replace(/(^\d$)/, '0$1')}</option>`,
+  )
+  .join('');
 
-for (const select of modalSelectors) {
+// Modal change listeners
+const modal = document.querySelector('.modal');
+const errorMsg = document.querySelector('#modal-error');
+
+for (const select of modal.querySelectorAll('select')) {
   select.addEventListener('change', () => {
-    errorMsg.setAttribute('aria-hidden', 'true')
+    errorMsg.setAttribute('aria-hidden', 'true');
     updateDate(
       modalYear.value,
       modalMonth.value,
       modalDate.value,
       modalHour.value,
-      modalMinute.value
-    )
-  })
+      modalMinute.value,
+    );
+  });
 }
 
-// Footer selector change listeners
-const footerSelectors = document.querySelectorAll('footer select')
-for (const select of footerSelectors) {
-  select.addEventListener('change', () => {
-    updateDate(year.value, month.value, date.value, hour.value, minute.value)
-  })
-}
+const secondsContainer = document.querySelector('#seconds');
+const getSecondsBtn = document.querySelector('#getSeconds');
 
-const newBirthday = document.querySelector('#getSeconds')
-const secondsContainer = document.querySelector('#seconds')
-const footerDate = document.querySelector('footer .date-selectors')
+let bday;
+let secondsData;
+let updateRenderer;
 
-let bday
-let secondsData
-let updateRenderer
+// Last submitted values — used to pre-fill modal on Start Over
+let lastYear, lastMonth, lastDate, lastHour, lastMinute;
 
 // Modal submit
-newBirthday.addEventListener('click', () => {
+getSecondsBtn.addEventListener('click', () => {
   if (!secondsData.dateValid) {
-    return errorMsg.setAttribute('aria-hidden', 'false')
+    return errorMsg.setAttribute('aria-hidden', 'false');
   }
 
-  // Sync footer selectors to modal values
-  year.value = modalYear.value
-  month.value = modalMonth.value
-  date.value = modalDate.value
-  hour.value = modalHour.value
-  minute.value = modalMinute.value
+  // Store submitted values for Start Over pre-fill
+  lastYear = modalYear.value;
+  lastMonth = modalMonth.value;
+  lastDate = modalDate.value;
+  lastHour = modalHour.value;
+  lastMinute = modalMinute.value;
 
-  animateCSS('.modal', 'zoomOut', () =>
-    modal.setAttribute('aria-hidden', 'true')
-  )
+  // Warp speed as modal exits, hold for 2s, then ease back as results arrive
+  setSpeedMultiplier(20, 600);
 
-  // Initialize the renderer once the container is visible
-  secondsContainer.setAttribute('aria-hidden', 'false')
-  animateCSS('#seconds', 'zoomInUp')
-  updateRenderer = initRenderer(secondsContainer)
+  animateCSS('.modal', 'zoomOut', () => {
+    modal.setAttribute('aria-hidden', 'true');
 
-  setTimeout(() => {
-    animateCSS('footer .date-selectors', 'bounceInUp')
-    footerDate.setAttribute('aria-hidden', 'false')
-  }, 800)
-})
+    setTimeout(() => {
+      setSpeedMultiplier(1, 2000);
+
+      secondsContainer.setAttribute('aria-hidden', 'false');
+      animateCSS('#seconds', 'zoomInUp');
+
+      updateRenderer = initRenderer(secondsContainer, onStartOver);
+      initShare(secondsContainer, () => secondsData);
+
+      // Move focus to results for keyboard/AT users
+      secondsContainer.focus();
+    }, 500);
+  });
+});
+
+function onStartOver() {
+  updateRenderer = null;
+
+  animateCSS('#seconds', 'zoomOut', () => {
+    secondsContainer.setAttribute('aria-hidden', 'true');
+    secondsContainer.innerHTML = '';
+
+    // Restore previous values in modal
+    modalYear.value = lastYear;
+    modalMonth.value = lastMonth;
+    modalDate.value = lastDate;
+    modalHour.value = lastHour;
+    modalMinute.value = lastMinute;
+
+    modal.setAttribute('aria-hidden', 'false');
+    animateCSS('.modal', 'zoomInUp');
+    modalYear.focus();
+  });
+}
 
 function updateDate(y, m, d, h, min) {
   bday = dateBuilder.makeBday(
-    Number(y), Number(m), Number(d), Number(h), Number(min)
-  )
-  secondsData = dateBuilder.getSecondsData(bday)
+    Number(y),
+    Number(m),
+    Number(d),
+    Number(h),
+    Number(min),
+  );
+  secondsData = dateBuilder.getSecondsData(bday);
 }
 
-// Initialize with a default date so secondsData is always defined
-updateDate(2020, 0, 1, 0, 0)
+// Initialize with a default so secondsData is always defined before first interaction
+updateDate(2020, 0, 1, 0, 0);
 
 // Render loop — updates the live second count every 100ms
 setInterval(() => {
-  const liveSeconds = Math.floor((Date.now() - bday.valueOf()) / 1000)
+  const liveSeconds = Math.floor((Date.now() - bday.valueOf()) / 1000);
   secondsData.seconds = liveSeconds
     .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   if (updateRenderer) {
-    updateRenderer(secondsData)
+    updateRenderer(secondsData);
   }
-}, 100)
+}, 100);
 
 function animateCSS(element, animationName, callback) {
-  const node = document.querySelector(element)
-  node.classList.add('animated', animationName)
+  const node = document.querySelector(element);
+  node.classList.add('animated', animationName);
 
   function handleAnimationEnd() {
-    node.classList.remove('animated', animationName)
-    node.removeEventListener('animationend', handleAnimationEnd)
-    if (typeof callback === 'function') callback()
+    node.classList.remove('animated', animationName);
+    node.removeEventListener('animationend', handleAnimationEnd);
+    if (typeof callback === 'function') callback();
   }
 
-  node.addEventListener('animationend', handleAnimationEnd)
+  node.addEventListener('animationend', handleAnimationEnd);
 }

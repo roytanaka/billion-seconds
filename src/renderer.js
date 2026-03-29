@@ -2,11 +2,10 @@
  * Creates a stable DOM structure inside `container` for the seconds display.
  * Returns an `update(secondsData)` function called on each interval tick.
  *
- * Using stable nodes (textContent updates) instead of innerHTML prevents
- * DOM teardown/rebuild on every tick and allows future modules (share, easter egg)
- * to safely hold references to child elements.
+ * @param {HTMLElement} container - The #seconds element
+ * @param {Function} onStartOver - Called when the "Try another date" button is clicked
  */
-export function initRenderer(container) {
+export function initRenderer(container, onStartOver) {
   const secondsEl = document.createElement('div')
   secondsEl.className = 'seconds'
 
@@ -24,7 +23,14 @@ export function initRenderer(container) {
   milestone2El.appendChild(milestone2Small)
 
   infoEl.append(fromDateEl, milestone1El, milestone2El)
-  container.append(secondsEl, infoEl)
+
+  const startOverBtn = document.createElement('button')
+  startOverBtn.className = 'btn-start-over'
+  startOverBtn.type = 'button'
+  startOverBtn.textContent = 'Try another date'
+  startOverBtn.addEventListener('click', onStartOver)
+
+  container.append(secondsEl, infoEl, startOverBtn)
 
   return function update(data) {
     if (!data.dateValid) {

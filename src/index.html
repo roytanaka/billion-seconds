@@ -2,25 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Billion Seconds Counter</title>
     <script type="module" src="/main.js"></script>
   </head>
   <body>
     <main>
-      <div class="modal" aria-hidden="false">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-hidden="false"
+      >
         <div class="modal-centering">
           <div class="modal-dialog">
             <div>
-              <h1>Billionth Second Counter</h1>
+              <h1 id="modal-title">Billionth Second Counter</h1>
               <hr />
-              <h2>
-                Enter your birthday and time of birth
-              </h2>
+              <h2>Enter your birthday and time of birth</h2>
             </div>
             <div class="modal-body">
               <div class="date-selectors">
@@ -97,72 +98,31 @@
                 </div>
               </div>
             </div>
-            <div class="modal-error" aria-hidden="true">
+            <div
+              class="modal-error"
+              id="modal-error"
+              aria-live="assertive"
+              aria-hidden="true"
+            >
               Oops. Please select a valid date.
             </div>
             <div class="modal-footer">
-              <button type="button" id="getSeconds">Go</button>
+              <button
+                type="button"
+                id="getSeconds"
+                aria-describedby="modal-error"
+              >Go</button>
             </div>
           </div>
         </div>
       </div>
-      <div id="seconds" aria-hidden="true"></div>
+      <div
+        id="seconds"
+        aria-hidden="true"
+        aria-live="polite"
+        aria-atomic="true"
+        tabindex="-1"
+      ></div>
     </main>
-    <footer>
-      <div class="date-selectors" aria-hidden="true">
-        <span class="select-wrapper">
-          <select
-            class="custom-dropdown"
-            name="year"
-            id="year"
-            title="choose year"
-          >
-            <option value="" disabled selected></option>
-          </select>
-        </span>
-        <span class="select-wrapper">
-          <select
-            class="custom-dropdown"
-            name="month"
-            id="month"
-            title="choose month"
-          >
-            <option value="" disabled selected></option>
-          </select>
-        </span>
-        <span class="select-wrapper">
-          <select
-            class="custom-dropdown"
-            name="date"
-            id="date"
-            title="choose date"
-          >
-            <option value="" disabled selected></option>
-          </select>
-        </span>
-        <span class="time-text">&nbsp;/&nbsp;</span>
-        <span class="select-wrapper">
-          <select
-            class="custom-dropdown"
-            name="hour"
-            id="hour"
-            title="choose hour"
-          >
-            <option value="" disabled selected></option>
-          </select>
-        </span>
-        <span class="time-text">:</span>
-        <span class="select-wrapper">
-          <select
-            class="custom-dropdown"
-            name="minute"
-            id="minute"
-            title="choose minute"
-          >
-            <option value="" disabled selected></option>
-          </select>
-        </span>
-      </div>
-    </footer>
   </body>
 </html>
